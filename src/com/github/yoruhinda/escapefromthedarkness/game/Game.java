@@ -1,25 +1,33 @@
 package com.github.yoruhinda.escapefromthedarkness.game;
 
+import com.github.yoruhinda.escapefromthedarkness.entity.Player;
+import com.github.yoruhinda.escapefromthedarkness.game.ui.GamePanel;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class Game extends Thread{
     private boolean running = true;
-    private JFrame frame = new JFrame();
-    private JPanel panel = new JPanel();
+    private JFrame gameFrame = new JFrame();
+    private GamePanel gamePanel = new GamePanel(this);
+    private Player player = new Player(gamePanel);
 
     public Game() {
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Escape From The Darkness");
-        panel.setBackground(Color.RED);
-        frame.add(panel);
-        frame.setVisible(true);
         start();
+    }
+
+    private void initializeFrame(){
+        gameFrame.setTitle("Escape From The Darkness");
+        gameFrame.setSize(500,500);
+        gameFrame.getContentPane().add(gamePanel);
+        gameFrame.setLocationRelativeTo(null);
+        gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gameFrame.setVisible(true);
     }
 
     @Override
     public void run(){
+        initializeFrame();
         final int desiredFPS = 60;
         final int desiredUPS = 60;
 
@@ -48,7 +56,7 @@ public class Game extends Thread{
             }
             if((System.nanoTime() - lastFPS) > drawThreshold){
                 lastFPS = System.nanoTime();
-                render();
+                gamePanel.repaint();
                 fps++;
             }
             if(!((System.nanoTime() - lastUPS) > updateThreshold || (System.nanoTime() - lastFPS) > drawThreshold)){
@@ -72,10 +80,14 @@ public class Game extends Thread{
     }
 
     private void update(){
-
+        player.update();
     }
 
-    private void render(){
+    public void render(Graphics graphics){
+        player.render(graphics);
+    }
 
+    public Player getPlayer() {
+        return player;
     }
 }
