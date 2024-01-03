@@ -1,11 +1,18 @@
 package com.github.yoruhinda.escapefromthedarkness.entity;
 
+import com.github.yoruhinda.escapefromthedarkness.animation.Animation;
 import com.github.yoruhinda.escapefromthedarkness.game.ui.GamePanel;
+import com.github.yoruhinda.escapefromthedarkness.sprite.Sprite;
+import com.github.yoruhinda.escapefromthedarkness.sprite.SpriteSheet;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity {
     private GamePanel gamePanel;
+    private int playerSpeed = 3;
     private boolean left, right;
 
     public Player(GamePanel gamePanel) {
@@ -14,16 +21,15 @@ public class Player extends Entity {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.fillRect(getX(), 350, 50, 50);
     }
 
     @Override
     public void update() {
-        if(left){
-            setX(getX() - 5);
+        if (left) {
+            setX(getX() - playerSpeed);
         }
-        if(right){
-            setX(getX() + 5);
+        if (right) {
+            setX(getX() + playerSpeed);
         }
     }
 

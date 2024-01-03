@@ -18,7 +18,7 @@ public class Game extends Thread{
 
     private void initializeFrame(){
         gameFrame.setTitle("Escape From The Darkness");
-        gameFrame.setSize(500,500);
+        gameFrame.setSize(1024,1024);
         gameFrame.getContentPane().add(gamePanel);
         gameFrame.setLocationRelativeTo(null);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
