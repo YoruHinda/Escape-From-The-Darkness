@@ -3,10 +3,14 @@ package com.github.yoruhinda.escapefromthedarkness.game;
 import com.github.yoruhinda.escapefromthedarkness.entity.Player;
 import com.github.yoruhinda.escapefromthedarkness.game.ui.GamePanel;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class Game extends Thread{
+    private BufferedImage gameIcon;
     private boolean running = true;
     private JFrame gameFrame = new JFrame();
     private GamePanel gamePanel = new GamePanel(this);
@@ -17,8 +21,14 @@ public class Game extends Thread{
     }
 
     private void initializeFrame(){
+        try {
+            gameIcon = ImageIO.read(this.getClass().getResource("/resources/icon.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        gameFrame.setIconImage(gameIcon);
         gameFrame.setTitle("Escape From The Darkness");
-        gameFrame.setSize(1024,1024);
+        gameFrame.setSize(512,512);
         gameFrame.getContentPane().add(gamePanel);
         gameFrame.setLocationRelativeTo(null);
         gameFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
