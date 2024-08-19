@@ -2,6 +2,7 @@ package com.github.yoruhinda.escapefromthedarkness.game;
 
 import com.github.yoruhinda.escapefromthedarkness.entity.Player;
 import com.github.yoruhinda.escapefromthedarkness.game.ui.GamePanel;
+import com.github.yoruhinda.escapefromthedarkness.level.Level;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -15,6 +16,7 @@ public class Game extends Thread{
     private JFrame gameFrame = new JFrame();
     private GamePanel gamePanel = new GamePanel(this);
     private Player player = new Player(gamePanel);
+    private Level level = new Level();
 
     public Game() {
         start();
@@ -95,6 +97,7 @@ public class Game extends Thread{
 
     public void render(Graphics graphics){
         player.render(graphics);
+        level.render(graphics);
     }
 
     public Player getPlayer() {
