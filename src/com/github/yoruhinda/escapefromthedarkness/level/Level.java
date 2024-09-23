@@ -6,6 +6,7 @@ import java.awt.*;
 
 public class Level {
     private Sprite sprite;
+    private int[][] platform;
 
     public Level() {
         CreateLevel();
